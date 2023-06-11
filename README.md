@@ -19,7 +19,7 @@ mongosync \
 2. use API call to run pause resume and commit the sync 
 to start sync process run below API call:-
   
-  curl localhost:27182/api/v1/start -XPOST \
+   curl localhost:27182/api/v1/start -XPOST \
 --data '
    {
       "source": "cluster0",
@@ -28,15 +28,15 @@ to start sync process run below API call:-
    
    to check the running and progress:-
    
-   curl localhost:27182/api/v1/progress -XGET
+    curl localhost:27182/api/v1/progress -XGET
    
    to pause the sync:-
    
-   curl localhost:27182/api/v1/pause -XPOST --data '{ }'
+    curl localhost:27182/api/v1/pause -XPOST --data '{ }'
    
    to resume the sync:-
    
-   curl localhost:27182/api/v1/resume -XPOST --data '{ }'
+    curl localhost:27182/api/v1/resume -XPOST --data '{ }'
    
    to commit the sync(the final cutover the sync)
     
