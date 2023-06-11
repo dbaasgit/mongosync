@@ -7,7 +7,41 @@ mongosync can continuously synchronize data between two clusters. You can use mo
 
 In addition to continuous data synchronization, mongosync can also facilitate a one time data migration between clusters.
 
-General Limitations
+**Steps to use this utility**
+1. create a bash script called mongosync.sh
+   and provice the source and destination cluster information with username and password.
+   
+   #!/bin/bash
+mongosync \
+   --cluster0 'mongodb+srv://username:password@cluster0.yjgdosg.mongodb.net' \
+   --cluster1 'mongodb+srv://username:password@app.mdp6vhu.mongodb.net'
+   
+2. use API call to run pause resume and commit the sync 
+to start sync process run below API call:-
+    curl localhost:27182/api/v1/start -XPOST \
+--data '
+   {
+      "source": "cluster0",
+      "destination": "cluster1"
+   } '
+   
+   to check the running and progress:-
+   curl localhost:27182/api/v1/progress -XGET
+   
+   to pause the sync:-
+   curl localhost:27182/api/v1/pause -XPOST --data '{ }'
+   
+   to resume the sync:-
+   curl localhost:27182/api/v1/resume -XPOST --data '{ }'
+   
+   to commit the sync(the final cutover the sync)
+    
+    curl localhost:27182/api/v1/commit -XPOST --data '{ }'
+
+
+
+
+**General Limitations**
 The minimum supported server version is MongoDB 6.0.
 
 The source and destination clusters must have the same release version.
